@@ -1,83 +1,90 @@
 <template>
     <div id="app">
-        <el-menu class="navbar" mode="horizontal">
-            <el-dropdown class="avatar-container" trigger="click">
-                <div class="avatar-wrapper">
-                    <i class="el-icon-caret-bottom"></i>
-                </div>
-                <el-dropdown-menu class="user-dropdown" slot="dropdown">
-                    <router-link class='inlineBlock' to="/">
-                        <el-dropdown-item>
-                            Home
-                        </el-dropdown-item>
-                    </router-link>
-                    <el-dropdown-item divided>
-                        <span @click="logout" style="display:block;">LogOut</span>
-                    </el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
+        <el-menu theme="dark" mode="horizontal" :router="true">
+            <div style="float: right">
+            <el-menu-item index="/">处理中心</el-menu-item>
+            <el-submenu index="2">
+                <template slot="title">我的工作台</template>
+                <el-menu-item index="2-1">选项1</el-menu-item>
+                <el-menu-item index="2-2">选项2</el-menu-item>
+                <el-menu-item index="2-3">选项3</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="/a">订单管理</el-menu-item>
+            </div>
         </el-menu>
-        <router-view></router-view>
-
+        <div class="pagebody">
+            <div class="sidebar">
+                <el-menu default-active="2" theme="dark">
+                    <el-submenu index="1">
+                        <template slot="title"><i class="el-icon-message"></i>导航一</template>
+                        <el-menu-item-group>
+                            <template slot="title">分组一</template>
+                            <el-menu-item index="1-1">选项1</el-menu-item>
+                            <el-menu-item index="1-2">选项2</el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item-group title="分组2">
+                            <el-menu-item index="1-3">选项3</el-menu-item>
+                        </el-menu-item-group>
+                        <el-submenu index="1-4">
+                            <template slot="title">选项4</template>
+                            <el-menu-item index="1-4-1">选项1</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                    <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
+                </el-menu>
+            </div>
+            <div class="cntcontainer">
+                <transition name="el-fade-in-linear" mode="out-in">
+                    <router-view></router-view>
+                </transition>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         data() {
-            return {}
+            return {
+            }
         },
         methods: {
-            logout() {
-
-            }
         }
     }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-    .navbar {
-        height: 50px;
-        line-height: 50px;
-        border-radius: 0px !important;
-        .hamburger-container {
-            line-height: 58px;
-            height: 50px;
-            float: left;
-            padding: 0 10px;
-        }
-        .errLog-container {
-            display: inline-block;
-            position: absolute;
-            right: 150px;
-        }
-        .screenfull {
-            position: absolute;
-            right: 90px;
-            top: 16px;
-            color: red;
-        }
-        .avatar-container {
-            height: 50px;
-            display: inline-block;
-            position: absolute;
-            right: 35px;
-            .avatar-wrapper {
-                cursor: pointer;
-                margin-top: 5px;
-                position: relative;
-                .user-avatar {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 10px;
-                }
-                .el-icon-caret-bottom {
-                    position: absolute;
-                    right: -20px;
-                    top: 25px;
-                    font-size: 12px;
-                }
-            }
-        }
+<style scoped>
+    .pagebody{
+        position: absolute;
+        top:61px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    .sidebar{
+        width:200px;
+        position: fixed;
+        top:61px;
+        bottom: 0;
+        background-color: #293038;
+        overflow-x: hidden;
+    }
+    .cntcontainer{
+        position: absolute;
+        width: auto;
+        top:0;
+        bottom: 0;
+        right: 0;
+        left: 200px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background-color: #eaedf1;
+    }
+    *, *:before, *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
     }
 </style>
